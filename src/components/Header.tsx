@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { ChevronDown, Menu, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "next-themes";
@@ -21,6 +21,12 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const ThemeIcon = theme === "dark" ? Sun : Moon;
+  const { pathname } = useLocation();
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   const handleCtaClick = () => {
     posthog.capture("cta_clicked", {
@@ -49,7 +55,10 @@ export default function Header() {
               <button
                 type="button"
                 className={cn(
-                  "flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground",
+                  "flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  isActive("/services")
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-foreground",
                 )}
               >
                 {serviceItem.label}
@@ -72,7 +81,12 @@ export default function Header() {
             <Link
               key={item.href}
               to={item.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+              className={cn(
+                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                isActive(item.href)
+                  ? "text-primary"
+                  : "text-foreground/80 hover:text-foreground",
+              )}
             >
               {item.label}
             </Link>
@@ -121,14 +135,20 @@ export default function Header() {
             <nav className="flex flex-col gap-4 py-6">
               {/* Services group */}
               <div className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-foreground">
+                <span className={cn(
+                  "text-sm font-semibold",
+                  isActive("/services") ? "text-primary" : "text-foreground"
+                )}>
                   {serviceItem.label}
                 </span>
                 {serviceItem.children.map((child) => (
                   <Link
                     key={child.href}
                     to={child.href}
-                    className="pl-4 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className={cn(
+                      "pl-4 text-sm transition-colors",
+                      isActive(child.href) ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                    )}
                     onClick={() => setMobileOpen(false)}
                   >
                     {child.label}
@@ -141,7 +161,10 @@ export default function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className="text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isActive(item.href) ? "text-primary" : "text-foreground/80 hover:text-foreground"
+                  )}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
