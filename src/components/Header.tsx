@@ -34,7 +34,7 @@ export default function Header() {
 
   const linkClass = (href: string) =>
     cn(
-      "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+      "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors whitespace-nowrap",
       isActive(href)
         ? "text-accent"
         : "text-foreground/80 hover:text-foreground",
@@ -70,7 +70,7 @@ export default function Header() {
             <DropdownMenuTrigger asChild>
               <button type="button" className={linkClass("/services")}>
                 {serviceItem.label}
-                <ChevronDown className="ml-0.5 size-3.5" />
+                <ChevronDown className="size-3.5" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-52">
