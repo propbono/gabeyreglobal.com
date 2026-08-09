@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { ChevronDown, Menu, Moon, Sun } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,20 +19,36 @@ const linkItems = NAV_ITEMS.slice(1);
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const ThemeIcon = theme === "dark" ? Sun : Moon;
   const { pathname } = useLocation();
+
+  useEffect(() => setMounted(true), []);
+
+  const ThemeIcon = mounted ? (theme === "dark" ? Sun : Moon) : Sun;
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
+  const linkClass = (href: string) =>
+    cn(
+      "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+      isActive(href)
+        ? "text-accent"
+        : "text-foreground/80 hover:text-foreground",
+    );
+
   const handleCtaClick = () => {
     posthog.capture("cta_clicked", {
       cta_location: "nav",
       cta_label: "Start a Project",
     });
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -52,17 +68,9 @@ export default function Header() {
           {/* Services dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button
-                type="button"
-                className={cn(
-                  "flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  isActive("/services")
-                    ? "text-primary"
-                    : "text-foreground/80 hover:text-foreground",
-                )}
-              >
+              <button type="button" className={linkClass("/services")}>
                 {serviceItem.label}
-                <ChevronDown className="size-3.5" />
+                <ChevronDown className="ml-0.5 size-3.5" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-52">
@@ -78,16 +86,7 @@ export default function Header() {
 
           {/* Plain nav links */}
           {linkItems.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              className={cn(
-                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                isActive(item.href)
-                  ? "text-primary"
-                  : "text-foreground/80 hover:text-foreground",
-              )}
-            >
+            <Link key={item.href} to={item.href} className={linkClass(item.href)}>
               {item.label}
             </Link>
           ))}
@@ -95,14 +94,16 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden items-center gap-2 lg:flex">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            aria-label="Toggle theme"
-          >
-            <ThemeIcon className="size-4" />
-          </Button>
+          {mounted && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              <ThemeIcon className="size-4" />
+            </Button>
+          )}
           <Button variant="default" size="sm" onClick={handleCtaClick} asChild>
             <Link to="/contact">Start a Project</Link>
           </Button>
@@ -115,15 +116,12 @@ export default function Header() {
               <Menu className="size-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent
-            side="right"
-            className="flex w-full flex-col sm:max-w-sm"
-          >
-            {/* Mobile nav header */}
-            <div className="flex items-center border-b pb-4">
+          <SheetContent side="right" className="flex w-full flex-col px-6 sm:max-w-sm">
+            {/* Mobile header */}
+            <div className="flex items-center border-b pb-5">
               <Link
                 to="/"
-                className="flex items-baseline gap-1 text-primary no-underline"
+                className="text-primary no-underline"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
                 onClick={() => setMobileOpen(false)}
               >
@@ -131,14 +129,15 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Mobile nav links */}
-            <nav className="flex flex-col gap-4 py-6">
-              {/* Services group */}
+            {/* Mobile links */}
+            <nav className="flex flex-col gap-5 py-8">
               <div className="flex flex-col gap-2">
-                <span className={cn(
-                  "text-sm font-semibold",
-                  isActive("/services") ? "text-primary" : "text-foreground"
-                )}>
+                <span
+                  className={cn(
+                    "text-sm font-semibold",
+                    isActive("/services") ? "text-accent" : "text-foreground",
+                  )}
+                >
                   {serviceItem.label}
                 </span>
                 {serviceItem.children.map((child) => (
@@ -147,7 +146,9 @@ export default function Header() {
                     to={child.href}
                     className={cn(
                       "pl-4 text-sm transition-colors",
-                      isActive(child.href) ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                      isActive(child.href)
+                        ? "text-accent font-medium"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                     onClick={() => setMobileOpen(false)}
                   >
@@ -156,14 +157,15 @@ export default function Header() {
                 ))}
               </div>
 
-              {/* Plain links */}
               {linkItems.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
                   className={cn(
                     "text-sm font-medium transition-colors",
-                    isActive(item.href) ? "text-primary" : "text-foreground/80 hover:text-foreground"
+                    isActive(item.href)
+                      ? "text-accent"
+                      : "text-foreground/80 hover:text-foreground",
                   )}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -174,20 +176,20 @@ export default function Header() {
 
             {/* Mobile CTA */}
             <div className="mt-auto border-t pt-6">
-              <div className="flex gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    setTheme(theme === "dark" ? "light" : "dark");
-                  }}
-                  aria-label="Toggle theme"
-                >
-                  <ThemeIcon className="size-4" />
-                </Button>
+              <div className="flex items-center gap-3">
+                {mounted && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleTheme}
+                    aria-label="Toggle theme"
+                  >
+                    <ThemeIcon className="size-4" />
+                  </Button>
+                )}
                 <Button
                   variant="default"
-                  className="flex-1"
+                  size="sm"
                   onClick={() => {
                     handleCtaClick();
                     setMobileOpen(false);
