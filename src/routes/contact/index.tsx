@@ -3,7 +3,7 @@ import { SectionWrapper } from "@/components/shared/section-wrapper";
 import { SectionHeader } from "@/components/shared/section-header";
 import { ContactForm } from "@/components/shared/contact-form";
 import { COMPANY } from "@/lib/constants";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/contact/")({
   component: ContactPage,
@@ -11,16 +11,16 @@ export const Route = createFileRoute("/contact/")({
 
 const CONTACT_INFO = [
   {
-    icon: Mail,
-    label: "Email",
-    value: COMPANY.email,
-    href: `mailto:${COMPANY.email}`,
+    icon: Phone,
+    label: "Phone",
+    value: "(416) 666-1676",
+    href: "tel:+14166661676",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "(647) 555-0123",
-    href: "tel:+16475550123",
+    value: "(647) 833-8068",
+    href: "tel:+16478338068",
   },
   {
     icon: MapPin,
