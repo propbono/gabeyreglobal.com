@@ -71,6 +71,7 @@ export const SITE_URLS = {
   gabeyreGlobal: "https://gabeyreglobal.ca",
   gemprint: "https://gemprint.ca",
   gmozer: "https://gmozer.ca",
+  archdrill: "https://archdrill.com",
 } as const;
 
 export const SOCIAL_LINKS = [

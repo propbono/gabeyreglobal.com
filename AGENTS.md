@@ -96,6 +96,17 @@ tanstackIntent:
     for: "Programmatic route tree building as an alternative to filesystem conventions: rootRoute, index, route, layout, physical, defineVirtualSubtreeConfig. Use with TanStack Router plugin's virtualRouteConfig option."
 <!-- intent-skills:end -->
 
+## Content & data notes
+
+- Companies (ventures) and Work (portfolio) are each rendered from a hardcoded
+  array duplicated in two files — a home-page section component
+  (`src/components/sections/companies-section.tsx`, `portfolio-grid.tsx`) and the
+  full-page route (`src/routes/companies/index.tsx`, `src/routes/work/index.tsx`).
+  There is no central data file; add a brand/project in both places.
+- Brand URLs live in `SITE_URLS` (`src/lib/constants.ts`); site/SEO description
+  copy lives in `src/routes/__root.tsx` (`SITE_DESCRIPTION`) and the JSON-LD +
+  meta in `src/routes/index.tsx`.
+
 ## Maintaining this file
 
 Keep this file for knowledge useful to almost every future agent session in this project.

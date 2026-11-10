@@ -14,7 +14,7 @@ const SITE_URL =
 const SITE_TITLE =
   "Gabeyre Global Inc — Software & Print for Canadian Business";
 const SITE_DESCRIPTION =
-  "Gabeyre Global Inc is a Canadian corporation operating Gemprint (commercial printing) and providing web & app development services. Based in Ontario, serving clients across Canada.";
+  "Gabeyre Global Inc is a Canadian corporation operating Gemprint (commercial printing) and Archdrill (AI interview coaching), and providing web & app development services. Based in Ontario, serving clients across Canada.";
 const OG_IMAGE = `${SITE_URL}/api/og?title=${encodeURIComponent(SITE_TITLE)}`;
 
 export const Route = createRootRoute({
