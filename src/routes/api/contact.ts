@@ -101,7 +101,7 @@ export const Route = createFileRoute("/api/contact")({
             await resend.emails.send({
               from: FROM_EMAIL,
               to: TO_EMAIL,
-              reply_to: data.email,
+              replyTo: data.email,
               subject: `New Contact Form: ${data.serviceInterest} inquiry from ${data.name.replace(/[\r\n]/g, " ")}`,
               html: `
                 <h2>New Contact Form Submission</h2>

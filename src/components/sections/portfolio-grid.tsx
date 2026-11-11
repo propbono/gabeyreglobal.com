@@ -37,6 +37,13 @@ const projects = [
     href: "https://wizcode-music.vercel.app",
     image: "/images/wizcode-screenshot.png",
   },
+  {
+    title: "Archdrill",
+    category: "SaaS / AI Application",
+    description:
+      "AI-powered system-design interview coach. Paste a job description to get a tailored architecture challenge with adaptive follow-up evaluation and a strengths/improvements summary.",
+    href: "https://archdrill.com",
+  },
 ];
 
 export function PortfolioGrid() {

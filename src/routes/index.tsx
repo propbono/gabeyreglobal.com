@@ -13,7 +13,7 @@ const jsonLd = {
   name: "Gabeyre Global Inc",
   url: "https://gabeyreglobal.ca",
   description:
-    "Gabeyre Global Inc is a Canadian corporation operating Gemprint (commercial printing) and providing web & app development services.",
+    "Gabeyre Global Inc is a Canadian corporation operating Gemprint (commercial printing) and Archdrill (AI system-design interview coaching), and providing web & app development services.",
   foundingDate: "2017",
   address: {
     "@type": "PostalAddress",
@@ -44,12 +44,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Gabeyre Global Inc is a Canadian corporation operating Gemprint (commercial printing) and providing web & app development services. Based in Ontario, serving clients across Canada.",
+          "Gabeyre Global Inc is a Canadian corporation operating Gemprint (commercial printing) and Archdrill (AI system-design interview coaching), and providing web & app development services. Based in Ontario, serving clients across Canada.",
       },
       {
         name: "keywords",
         content:
-          "Canadian software development company, web development Canada, custom software Ontario, commercial printing Canada, Gemprint, print and software company",
+          "Canadian software development company, web development Canada, custom software Ontario, commercial printing Canada, Gemprint, Archdrill, AI interview coaching, print and software company",
       },
     ],
   }),

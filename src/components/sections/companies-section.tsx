@@ -12,6 +12,14 @@ const companies = [
     href: "https://gemprint.ca",
     status: "live" as const,
   },
+  {
+    id: "archdrill",
+    name: "Archdrill",
+    description:
+      "AI system-design interview coach for senior engineers. Paste a job description and get a tailored architecture challenge with adaptive feedback.",
+    href: "https://archdrill.com",
+    status: "live" as const,
+  },
 ];
 
 export function CompaniesSection() {

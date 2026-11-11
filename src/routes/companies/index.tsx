@@ -13,6 +13,12 @@ const companies = [
     href: "https://gemprint.ca",
     status: "live" as const,
   },
+  {
+    name: "Archdrill",
+    description: "AI system-design interview coach for senior engineers. Paste a job description and get a tailored architecture challenge with adaptive feedback.",
+    href: "https://archdrill.com",
+    status: "live" as const,
+  },
 ];
 
 function CompaniesPage() {
@@ -24,8 +30,8 @@ function CompaniesPage() {
           subtext="Gabeyre Global Inc is the parent company of a growing family of brands. Each subsidiary operates independently with its own focus, customers, and identity."
         />
         <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {companies.map((c, i) => (
-            <CompanyCard key={`${c.name}-${i}`} {...c} />
+          {companies.map((c) => (
+            <CompanyCard key={c.name} {...c} />
           ))}
           {/* Subtle hint at future growth */}
           <div className="flex items-center justify-center rounded-xl border border-dashed border-border bg-card/30 p-6 text-center">
@@ -52,8 +58,9 @@ function CompaniesPage() {
                 <span className="text-sm font-semibold text-foreground">Gemprint</span>
                 <p className="text-xs text-muted-foreground">Commercial Print</p>
               </div>
-              <div className="rounded-xl border border-dashed border-border bg-card/30 px-6 py-3 text-center">
-                <span className="text-sm font-medium text-muted-foreground/60">More coming</span>
+              <div className="rounded-xl border border-border bg-card px-6 py-3 text-center shadow-sm">
+                <span className="text-sm font-semibold text-foreground">Archdrill</span>
+                <p className="text-xs text-muted-foreground">AI Interview Coaching</p>
               </div>
             </div>
           </div>

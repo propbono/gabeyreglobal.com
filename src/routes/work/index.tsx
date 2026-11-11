@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/shared/section-wrapper";
 import { SectionHeader } from "@/components/shared/section-header";
@@ -39,6 +38,13 @@ const projects = [
       "Music discovery app using iTunes API and React Query. Demonstrates API integration, state management, and testing with Vitest.",
     image: "/images/wizcode-screenshot.png",
     href: "https://wizcode-music.vercel.app",
+  },
+  {
+    title: "Archdrill",
+    category: "SaaS / AI Application",
+    description:
+      "AI-powered system-design interview coach. Paste a job description to get a tailored architecture challenge with adaptive follow-up evaluation and a strengths/improvements summary.",
+    href: "https://archdrill.com",
   },
 ];
 

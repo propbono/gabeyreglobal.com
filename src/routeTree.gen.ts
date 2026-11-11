@@ -15,8 +15,8 @@ import { Route as ErrorRouteImport } from './routes/error'
 import { Route as NotFoundRouteImport } from './routes/not-found'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as WorkRouteImport } from './routes/work'
-import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as CompaniesIndexRouteImport } from './routes/companies/index'
 import { Route as ContactIndexRouteImport } from './routes/contact/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
@@ -54,14 +54,14 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiOgRoute = ApiOgRouteImport.update({
-  id: '/api/og',
-  path: '/api/og',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiContactRoute = ApiContactRouteImport.update({
   id: '/api/contact',
   path: '/api/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiOgRoute = ApiOgRouteImport.update({
+  id: '/api/og',
+  path: '/api/og',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompaniesIndexRoute = CompaniesIndexRouteImport.update({
@@ -102,8 +102,8 @@ export interface FileRoutesByFullPath {
   '/not-found': typeof NotFoundRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work': typeof WorkRouteWithChildren
-  '/api/og': typeof ApiOgRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/og': typeof ApiOgRoute
   '/services/development': typeof ServicesDevelopmentRoute
   '/services/print': typeof ServicesPrintRoute
   '/companies/': typeof CompaniesIndexRoute
@@ -117,8 +117,8 @@ export interface FileRoutesByTo {
   '/error': typeof ErrorRoute
   '/not-found': typeof NotFoundRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/api/og': typeof ApiOgRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/og': typeof ApiOgRoute
   '/services/development': typeof ServicesDevelopmentRoute
   '/services/print': typeof ServicesPrintRoute
   '/companies': typeof CompaniesIndexRoute
@@ -134,8 +134,8 @@ export interface FileRoutesById {
   '/not-found': typeof NotFoundRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/work': typeof WorkRouteWithChildren
-  '/api/og': typeof ApiOgRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/og': typeof ApiOgRoute
   '/services/development': typeof ServicesDevelopmentRoute
   '/services/print': typeof ServicesPrintRoute
   '/companies/': typeof CompaniesIndexRoute
@@ -152,8 +152,8 @@ export interface FileRouteTypes {
     | '/not-found'
     | '/sitemap.xml'
     | '/work'
-    | '/api/og'
     | '/api/contact'
+    | '/api/og'
     | '/services/development'
     | '/services/print'
     | '/companies/'
@@ -167,8 +167,8 @@ export interface FileRouteTypes {
     | '/error'
     | '/not-found'
     | '/sitemap.xml'
-    | '/api/og'
     | '/api/contact'
+    | '/api/og'
     | '/services/development'
     | '/services/print'
     | '/companies'
@@ -183,8 +183,8 @@ export interface FileRouteTypes {
     | '/not-found'
     | '/sitemap.xml'
     | '/work'
-    | '/api/og'
     | '/api/contact'
+    | '/api/og'
     | '/services/development'
     | '/services/print'
     | '/companies/'
@@ -200,8 +200,8 @@ export interface RootRouteChildren {
   NotFoundRoute: typeof NotFoundRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WorkRoute: typeof WorkRouteWithChildren
-  ApiOgRoute: typeof ApiOgRoute
   ApiContactRoute: typeof ApiContactRoute
+  ApiOgRoute: typeof ApiOgRoute
   ServicesDevelopmentRoute: typeof ServicesDevelopmentRoute
   ServicesPrintRoute: typeof ServicesPrintRoute
   CompaniesIndexRoute: typeof CompaniesIndexRoute
@@ -253,18 +253,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/og': {
-      id: '/api/og'
-      path: '/api/og'
-      fullPath: '/api/og'
-      preLoaderRoute: typeof ApiOgRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/contact': {
       id: '/api/contact'
       path: '/api/contact'
       fullPath: '/api/contact'
       preLoaderRoute: typeof ApiContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/og': {
+      id: '/api/og'
+      path: '/api/og'
+      fullPath: '/api/og'
+      preLoaderRoute: typeof ApiOgRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/companies/': {
@@ -329,8 +329,8 @@ const rootRouteChildren: RootRouteChildren = {
   NotFoundRoute: NotFoundRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WorkRoute: WorkRouteWithChildren,
-  ApiOgRoute: ApiOgRoute,
   ApiContactRoute: ApiContactRoute,
+  ApiOgRoute: ApiOgRoute,
   ServicesDevelopmentRoute: ServicesDevelopmentRoute,
   ServicesPrintRoute: ServicesPrintRoute,
   CompaniesIndexRoute: CompaniesIndexRoute,
