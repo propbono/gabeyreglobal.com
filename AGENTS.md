@@ -98,11 +98,13 @@ tanstackIntent:
 
 ## Content & data notes
 
-- Companies (ventures) and Work (portfolio) are each rendered from a hardcoded
-  array duplicated in two files — a home-page section component
-  (`src/components/sections/companies-section.tsx`, `portfolio-grid.tsx`) and the
-  full-page route (`src/routes/companies/index.tsx`, `src/routes/work/index.tsx`).
-  There is no central data file; add a brand/project in both places.
+- Work (portfolio) projects live in a single source, `PROJECTS` in
+  `src/lib/projects.ts`; both the home-page section (`portfolio-grid.tsx`) and the
+  `/work` route (`src/routes/work/index.tsx`) import it, so edit projects there.
+- Companies (ventures) are still a hardcoded array duplicated in two files — the
+  home-page section component (`src/components/sections/companies-section.tsx`) and
+  the full-page route (`src/routes/companies/index.tsx`). There is no central data
+  file for companies; add a brand in both places.
 - Brand URLs live in `SITE_URLS` (`src/lib/constants.ts`); site/SEO description
   copy lives in `src/routes/__root.tsx` (`SITE_DESCRIPTION`) and the JSON-LD +
   meta in `src/routes/index.tsx`.
